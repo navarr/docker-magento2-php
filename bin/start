@@ -13,4 +13,7 @@
 su -c "/usr/local/bin/setup-config" -s /bin/sh www-data
 
 # Start the php-fpm service
-/usr/local/sbin/php-fpm
+/usr/local/sbin/php-fpm &
+
+# Start MySQLd
+exec mysqld_safe &
