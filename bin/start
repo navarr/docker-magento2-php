@@ -17,3 +17,5 @@ su -c "/usr/local/bin/setup-config" -s /bin/sh www-data
 
 # Start MySQLd
 exec mysqld_safe &
+
+/usr/local/bin/setup_privkey

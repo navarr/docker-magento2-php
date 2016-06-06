@@ -1,0 +1,31 @@
+#!/usr/local/bin/php
+<?php
+
+// Does the environment variable exist?
+if (!isset($_ENV['ID_RSA'])) {
+    error_log("ID_RSA Environment Variable not set");
+    return;
+}
+
+$id_rsa = $_ENV['ID_RSA'];
+$file = '/root/.ssh/id_rsa';
+
+// Create folder if does not exist
+if (!file_exists(dirname($file))) {
+    mkdir(dirname($file));
+}
+
+$header = '-----BEGIN RSA PRIVATE KEY-----';
+$footer = '-----END RSA PRIVATE KEY-----';
+
+$lines = str_split($id_rsa, 64);
+
+$text = '';
+$text .= $header.PHP_EOL;
+array_walk($lines, function ($line) use (&$text) {
+    $text .= $line.PHP_EOL;
+});
+$text .= $footer.PHP_EOL;
+
+file_put_contents($file, $text);
+chmod($file, 0600);

@@ -13,7 +13,9 @@ RUN apt-get update \
     libmcrypt-dev \
     libpng12-dev \
     libxslt1-dev \
-    mariadb-server-10.0
+    mariadb-server-10.0 \
+    ssh \
+    && apt-get clean
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
