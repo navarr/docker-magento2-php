@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM php:7.0.5-fpm
+FROM php:7.0.8-fpm
 MAINTAINER Navarr Barnier <Navarr.Barnier@briteskies.com>
 # Don't email me.  I have no idea what I'm doing.
 
