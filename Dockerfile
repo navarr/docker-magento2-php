@@ -15,6 +15,7 @@ RUN apt-get update \
     libxslt1-dev \
     mariadb-server-10.0 \
     ssh \
+    git \
     && apt-get clean
 
 RUN docker-php-ext-configure \
@@ -22,6 +23,7 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install \
   gd \
+  bcmath \
   intl \
   mbstring \
   mcrypt \
@@ -45,6 +47,7 @@ COPY conf/php.ini /usr/local/etc/php/
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY bin/* /usr/local/bin/
 COPY conf/my.cnf /etc/mysql/conf.d
+COPY conf/known_hosts /etc/ssh/ssh_known_hosts
 
 RUN exec /usr/local/bin/create-mysql-admin-user
 
