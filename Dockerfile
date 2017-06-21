@@ -16,6 +16,7 @@ RUN apt-get update \
     mariadb-server-10.0 \
     ssh \
     git \
+    openconnect \
     && apt-get clean
 
 RUN docker-php-ext-configure \
