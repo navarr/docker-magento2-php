@@ -16,7 +16,14 @@ RUN apt-get update \
     mariadb-server-10.0 \
     ssh \
     git \
-    && apt-get clean
+    && apt-get clean \
+    && cd /tmp \
+    && curl -o ioncube.tar.gz http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+    && echo "7e112dec9097e9f688f6c9091523b60b72aafcdb  ioncube.tar.gz"|shasum -c \
+    && tar -xvvzf ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_7.0.so /usr/local/lib/php/extensions/* \
+    && rm -Rf ioncube.tar.gz ioncube \
+    && echo "zend_extension=ioncube_loader_lin_7.0.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube_loader_lin_7.0.ini
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
